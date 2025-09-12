@@ -149,5 +149,7 @@ def register_user(message:Message):
         confirm_asc_src(message)
     else:
         confirm_asc_src(message)
+    if message.text=='Ассаламу алейкум':
+        bot.send_message(chat_id,'Ваалейкум Ассалам')
 
 bot.infinity_polling()
