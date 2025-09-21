@@ -7,6 +7,8 @@ import requests
 from base_curse import get_history,save_translate_data,get_user,save_info
 from news import get_news,get_bussines_news,get_economy_news,get_university_news
 from weather_info import weather_info
+from event_categories import get_concerts,get_teaters
+import time
 load_dotenv()
 token=os.getenv('TOKEN')
 bot=TeleBot(token)
@@ -17,7 +19,7 @@ def commands(message: Message):
     user = get_user(chat_id)
 
     if not user:
-        bot.send_message(chat_id, f'👋🏻 Здравствуйте, {user_name}!\n🤖 Вас приветствует информативный бот по курсам валют и новостям ')
+        bot.send_message(chat_id, f'👋🏻 Здравствуйте, {user_name}!\n🤖 Вас приветствует информативный бот')
         bot.send_message(chat_id, '📲 Для использования бота пройдите регистрацию, нажав кнопку ниже 👇', reply_markup=contact_btn())
     else:
         bot.send_message(chat_id, '📍 Выберите из меню, что вы желаете 💼', reply_markup=main_menu())
@@ -37,12 +39,13 @@ def register_user(message: Message):
     elif message.text=='/help':
         bot.send_message(chat_id,f'🛠Чтобы связаться с разработчиком пишите на аккаунт @um1dov7,если возникнут проблемы')
     elif message.text=='/about':
-        bot.send_message(chat_id,'''💱 Добро пожаловать в Currency & News Bot!  
-Здесь вы можете:  
-🔸 Узнать актуальные курсы валют  
-🔸 Читать свежие новости  
-
-Просто нажми на /start для запуска бота''')
+        bot.send_message(chat_id,'''😊 Добро пожаловать в Info_bot  
+🔸 📈 Актуальные курсы валют
+🔸 📰 Свежие новости
+🔸 🎭 Афиша театров и спектаклей
+🔸 🎤 Концерты и мероприятия
+🔸 ⛅ Прогноз погоды
+✨ Просто нажми /start, чтобы открыть главное меню!''')
     elif message.text=='/history':
         history = get_history(chat_id)
         text_history = ''
@@ -126,6 +129,8 @@ def reaction_weather(message:Message):
 def get_country(message:Message):
     chat_id = message.chat.id
     city=message.text.strip()
+    if city.startswith('/'):
+        commands(message)
     try:
         weather=weather_info(city)
         bot.send_message(chat_id,weather,reply_markup=main_menu())
@@ -204,11 +209,34 @@ def get_events(message:Message):
     bot.send_message(chat_id, '📢 «Вы открыли раздел 📅 Ближайшие события', reply_markup=ReplyKeyboardRemove())
     bot.send_message(chat_id,'🛠 Вот раздел ближащих событий что вас интересует',reply_markup=events_buttons())
 @bot.message_handler(regexp='🎤 Концерты / музыка')
-def send_movie(message:Message):
+def send_concerts(message:Message):
     chat_id = message.chat.id
     msg_id = message.message_id
     bot.delete_message(chat_id, msg_id)
-    bot.send_message(chat_id, '📢 «Вы открыли раздел 🎬 Кинопремьеры / кино', reply_markup=ReplyKeyboardRemove())
+    bot.send_message(chat_id, '📢 «Вы открыли раздел 🎤 Концерты / музыка', reply_markup=ReplyKeyboardRemove())
+    get_concert(message)
+def get_concert(message:Message):
+    chat_id = message.chat.id
+    news = get_concerts()
+    for new in news:
+        news_text = f'📰 Заголовок: {new["title"]}\n📌 Локация концерта: {new["venue"]}\n🖼 Фото: {new["img"]}\n🔗 Подробнее: {new["url"]}'
+        bot.send_message(chat_id,news_text,reply_markup=main_menu())
+@bot.message_handler(regexp='🎭 Театры / спектакли')
+def send_concerts(message:Message):
+    chat_id = message.chat.id
+    msg_id = message.message_id
+    bot.delete_message(chat_id, msg_id)
+    bot.send_message(chat_id, '📢 «Вы открыли раздел 🎭 Театры / спектакли', reply_markup=ReplyKeyboardRemove())
+    get_teatr(message)
+def get_teatr(message:Message):
+    chat_id = message.chat.id
+    news = get_teaters()
+    for new in news:
+        news_text = f'📰 Заголовок: {new["title"]}\n📌 Локация концерта: {new["venue"]}\n🖼 Фото: {new["img"]}\n🔗 Подробнее: {new["url"]}'
+        bot.send_message(chat_id,news_text,reply_markup=main_menu())
+
+
+
 
 #-----------------------------------------------------------------------------------------------
 
