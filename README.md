@@ -43,30 +43,30 @@ cd your-repo-name
 Create a virtual environment:
 
 bash
-Копировать код
+
 python -m venv venv
 Activate the virtual environment:
 
 Windows:
 
 bash
-Копировать код
+
 venv\Scripts\activate
 Linux / MacOS:
 
 bash
-Копировать код
+
 source venv/bin/activate
 Install dependencies:
 
 bash
-Копировать код
+
 pip install -r requirements.txt
 Set up your Telegram Bot Token in config.py
 (Get your own key from @BotFather to activate the bot)
 
 🚀 Running the Bot
 bash
-Копировать код
+
 python main.py
 The bot will now be live and responsive in Telegram.
