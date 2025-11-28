@@ -1,15 +1,18 @@
 # Telegram Bot
 
-This is a **Telegram bot** built with Python. It provides various interactive features, including daily facts, weather information, news, and event categories. The bot is structured to be modular and easy to extend.
+This is a **Telegram bot** built with Python using **pyTelegramBotAPI**.  
+It provides various interactive features, including daily facts, weather information, news, event categories, and currency exchange rates.  
+The bot is modular and easy to extend.
 
 ---
 
 ## 🛠 Features
 
-- **Event Categories**: Browse different events and categories.
-- **Daily Fact**: Get a random fact every day.
-- **Weather Info**: Check current weather for a specified city.
-- **News**: Get the latest news with additional functionalities.
+- **Event Categories**: Browse different events and categories.  
+- **Daily Fact**: Get a random fact every day.  
+- **Weather Info**: Check current weather for a specified city.  
+- **News**: Get the latest news with additional functionalities.  
+- **Currency Exchange Rates**: Check current currency rates.  
 - **Interactive Buttons**: Navigate bot functions easily using inline buttons.
 
 ---
@@ -31,20 +34,39 @@ This is a **Telegram bot** built with Python. It provides various interactive fe
 ---
 
 ## ⚡ Installation
-Take your own key from Got father to activate the bot
+
+1. **Clone the repository**:
+
+```bash
+git clone https://github.com/Kamoliddin7777/your-repo-name.git
+cd your-repo-name
 Create a virtual environment:
 
+bash
+Копировать код
 python -m venv venv
-1. Clone the repository:
 Activate the virtual environment:
 
 Windows:
 
+bash
+Копировать код
 venv\Scripts\activate
+Linux / MacOS:
 
+bash
+Копировать код
+source venv/bin/activate
+Install dependencies:
+
+bash
+Копировать код
 pip install -r requirements.txt
+Set up your Telegram Bot Token in config.py
+(Get your own key from @BotFather to activate the bot)
+
+🚀 Running the Bot
+bash
+Копировать код
 python main.py
-take your own key from Got father to activate the bot
-```bash
-git clone https://github.com/Kamoliddin7777/your-repo-name.git
-cd your-repo-name
+The bot will now be live and responsive in Telegram.
