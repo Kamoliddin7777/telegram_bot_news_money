@@ -31,6 +31,7 @@ This is a **Telegram bot** built with Python. It provides various interactive fe
 ---
 
 ## ⚡ Installation
+Take your own key from Got father to activate the bot
 Create a virtual environment:
 
 python -m venv venv
